@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vincent Li | Offer & Financing Strength Summary</title>
+  <style>
+    :root { --b:#111; --m:#666; --bd:#e5e7eb; --bg:#fafafa; --card:#fff; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; color:var(--b); background:var(--bg); }
+    .wrap { max-width: 1020px; margin: 0 auto; padding: 28px 16px 60px; }
+    .top { display:flex; gap:14px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; }
+    .brand h1 { margin:0; font-size: 26px; letter-spacing:-0.2px; }
+    .brand p { margin:6px 0 0; color:var(--m); }
+    .pill { display:inline-flex; border:1px solid var(--bd); border-radius:999px; padding:6px 10px; background:#fff; font-size:12px; color:#333; gap:8px; align-items:center; }
+    .grid { display:grid; grid-template-columns: 1fr; gap:14px; margin-top: 18px; }
+    @media (min-width: 900px){ .grid { grid-template-columns: 1.2fr 0.8fr; } }
+    .card { background:var(--card); border:1px solid var(--bd); border-radius:18px; padding:16px; }
+    .card h2 { margin:0 0 10px; font-size: 16px; }
+    .row { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+    label { font-size:12px; color:var(--m); display:block; margin-bottom:6px; }
+    input, select, textarea { width:100%; padding:10px 10px; border:1px solid var(--bd); border-radius:12px; background:#fff; font-size:14px; }
+    textarea { min-height: 90px; }
+    .btn { cursor:pointer; border:1px solid #111; background:#111; color:#fff; padding:10px 12px; border-radius:12px; font-weight:600; }
+    .btn2 { cursor:pointer; border:1px solid var(--bd); background:#fff; color:#111; padding:10px 12px; border-radius:12px; font-weight:600; }
+    .btns { display:flex; gap:10px; flex-wrap:wrap; }
+    .kvs { display:grid; grid-template-columns: 1fr; gap:8px; }
+    .kv { display:flex; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px dashed var(--bd); }
+    .kv span:first-child { color:var(--m); }
+    .badge { display:inline-block; padding:4px 10px; border-radius:999px; border:1px solid var(--bd); font-size:12px; background:#fff; }
+    .ok { border-color:#86efac; }
+    .warn{ border-color:#fcd34d; }
+    .bad { border-color:#fca5a5; }
+    .small { font-size:12px; color:var(--m); }
+    .footer { margin-top: 16px; color: var(--m); font-size: 12px; }
+    .cta { display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; }
+    .report { margin-top: 12px; display:none; }
+    .report.show { display:block; }
+    .sep { height:1px; background:var(--bd); margin: 12px 0; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <h1>Offer & Financing Strength Summary</h1>
+        <p>
+          Fast pre-check for CA / WA / TX agents — generate a clean, seller-friendly & underwriting-ready summary in ~2 minutes.
+        </p>
+        <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+          <span class="pill"><strong>Vincent Li</strong> · Loan Originator · <span class="mono">NMLS #1987411</span></span>
+          <span class="pill">No login required</span>
+        </div>
+      </div>
+
+      <div class="card" style="min-width:280px;">
+        <h2>Contact Vincent</h2>
+        <div class="kvs">
+          <div class="kv"><span>Phone</span><span id="vPhone">(Your Phone)</span></div>
+          <div class="kv"><span>Email</span><span id="vEmail">(Your Email)</span></div>
+          <div class="kv"><span>States</span><span>CA · WA · TX</span></div>
+        </div>
+        <div class="cta">
+          <a class="btn" id="callBtn" href="#">Call/Text</a>
+          <a class="btn2" id="emailBtn" href="#">Email</a>
+        </div>
+        <div class="footer">
+          Tip: You can paste this report into your offer email or save as PDF (Print → Save as PDF).
+        </div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Scenario Inputs</h2>
+
+        <div class="row">
+          <div>
+            <label>State</label>
+            <select id="state">
+              <option value="CA">California (CA)</option>
+              <option value="WA">Washington (WA)</option>
+              <option value="TX">Texas (TX)</option>
+            </select>
+          </div>
+          <div>
+            <label>Occupancy</label>
+            <select id="occ">
+              <option value="Investment">Investment</option>
+              <option value="Primary">Primary</option>
+              <option value="SecondHome">Second Home</option>
+            </select>
+          </div>
+
+          <div>
+            <label>Purchase Price</label>
+            <input id="price" type="number" value="650000" />
+          </div>
+          <div>
+            <label>Down Payment</label>
+            <input id="dp" type="number" value="162500" />
+          </div>
+
+          <div>
+            <label>Estimated Value (if different)</label>
+            <input id="value" type="number" value="650000" />
+          </div>
+          <div>
+            <label>Credit Score (est.)</label>
+            <input id="fico" type="number" value="700" />
+          </div>
+
+          <div>
+            <label>Interest Rate (est.)</label>
+            <input id="rate" type="number" step="0.0001" value="0.0785" />
+          </div>
+          <div>
+            <label>Term (years)</label>
+            <input id="term" type="number" value="30" />
+          </div>
+
+          <div>
+            <label>Taxes (monthly)</label>
+            <input id="tax" type="number" value="650" />
+          </div>
+          <div>
+            <label>Insurance (monthly)</label>
+            <input id="ins" type="number" value="220" />
+          </div>
+
+          <div>
+            <label>HOA (monthly)</label>
+            <input id="hoa" type="number" value="0" />
+          </div>
+          <div>
+            <label>Rent (monthly) — investment</label>
+            <input id="rent" type="number" value="4200" />
+          </div>
+
+          <div>
+            <label>Borrower Gross Income (monthly) — owner occ</label>
+            <input id="income" type="number" value="14000" />
+          </div>
+          <div>
+            <label>Other Monthly Debts</label>
+            <input id="debt" type="number" value="900" />
+          </div>
+
+          <div>
+            <label>Offer Close Days</label>
+            <input id="closeDays" type="number" value="21" />
+          </div>
+          <div>
+            <label>Appraisal Gap (optional)</label>
+            <input id="gap" type="number" value="10000" />
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="row">
+          <div>
+            <label>Financing contingency?</label>
+            <select id="finC">
+              <option value="yes" selected>Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+          <div>
+            <label>Inspection contingency?</label>
+            <select id="insC">
+              <option value="yes" selected>Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+          <div>
+            <label>Sale-of-home contingency?</label>
+            <select id="saleC">
+              <option value="no" selected>No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </div>
+          <div>
+            <label>Notes (optional)</label>
+            <textarea id="notes" placeholder="e.g., DSCR investor, wants 14-day close, strong reserves…"></textarea>
+          </div>
+        </div>
+
+        <div style="margin-top:12px" class="btns">
+          <button class="btn" id="gen">Generate Report</button>
+          <button class="btn2" id="print">Print / Save as PDF</button>
+        </div>
+
+        <p class="small" style="margin-top:10px;">
+          Estimates for discussion only — final terms/eligibility subject to lender guidelines, documentation, appraisal, and underwriting.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Instant Estimates</h2>
+        <div class="kvs" id="quick"></div>
+        <div class="sep"></div>
+        <h2>Top Recommendations</h2>
+        <div id="recs" class="small"></div>
+        <div class="sep"></div>
+        <h2>Risk Flags</h2>
+        <div id="flags" class="small"></div>
+      </div>
+    </div>
+
+    <div class="card report" id="report">
+      <h2>Report Preview</h2>
+      <div class="small">Shareable summary. Print → Save as PDF to send with the offer.</div>
+      <div class="sep"></div>
+      <div id="reportBody"></div>
+
+      <div class="sep"></div>
+      <div class="small">
+        Prepared by <strong>Vincent Li</strong> · Loan Originator · <span class="mono">NMLS #1987411</span><br/>
+        Contact: <span id="rPhone">(Your Phone)</span> · <span id="rEmail">(Your Email)</span>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // ====== EDIT THESE TWO VALUES ======
+  const VINCENT_PHONE = "(909)610-0218";
+  const VINCENT_EMAIL = "Vli@emortgagecapital.com";
+  // ==================================
+
+  const $ = (id) => document.getElementById(id);
+  const n = (v) => { const x = Number(v); return Number.isFinite(x) ? x : 0; };
+  const money = (v) => v.toLocaleString(undefined, { style:"currency", currency:"USD", maximumFractionDigits:0 });
+  const pct = (v) => (v*100).toFixed(2) + "%";
+
+  function estPI(loan, rate, years){
+    const r = rate/12;
+    const nper = years*12;
+    if (r<=0) return loan/nper;
+    return (loan*r*Math.pow(1+r,nper))/(Math.pow(1+r,nper)-1);
+  }
+
+  function offerScore(closeDays, finC, insC, saleC, gap){
+    let s=50;
+    if (closeDays<=14) s+=18; else if (closeDays<=21) s+=12; else if (closeDays<=30) s+=6; else s-=4;
+    s += finC ? -10 : 10;
+    s += insC ? -6 : 6;
+    s += saleC ? -18 : 8;
+    if (gap>=25000) s+=10; else if (gap>=10000) s+=6; else if (gap>0) s+=3;
+    return Math.max(0, Math.min(100, s));
+  }
+
+  function programRecs(occ, dscr, fico, dpPct){
+    const out=[];
+    if (occ==="Investment"){
+      out.push({
+        name:"DSCR (Rental Cash Flow)",
+        fit: dscr>=1.15 ? "Strong" : (dscr>=1.0 ? "Good" : "Possible"),
+        why:[
+          `DSCR estimated at ${dscr.toFixed(2)}.`,
+          "Qualifies primarily on rental cash flow rather than DTI.",
+          "Works well for investor acquisitions and portfolio growth."
+        ]
+      });
+    }
+    if (occ!=="Investment"){
+      out.push({
+        name:"Conventional (Agency)",
+        fit: fico>=680 ? "Strong" : "Good",
+        why:["Best pricing when income/assets are fully documented.","Great for primary/second-home purchases."]
+      });
+    }
+    out.push({
+      name:"Bank Statement (Alt Doc)",
+      fit:"Good",
+      why:["Useful for self-employed or when tax returns understate cash flow.","Consider 12–24 months statements."]
+    });
+    out.push({
+      name:"Jumbo / Non-QM Options",
+      fit: dpPct>=0.20 ? "Good" : "Possible",
+      why:["Flexible for larger loan amounts and complex income scenarios.","Program fit depends on credit, reserves, and property type."]
+    });
+    out.push({
+      name:"Buy Before You Sell (where applicable)",
+      fit:"Possible",
+      why:["Helps move-up buyers purchase before selling.","Exact eligibility depends on existing mortgage and documented exit strategy."]
+    });
+    const rank={Strong:0,Good:1,Possible:2};
+    out.sort((a,b)=>rank[a.fit]-rank[b.fit]);
+    return out.slice(0,2);
+  }
+
+  function badgeClass(fit){
+    if (fit==="Strong") return "badge ok";
+    if (fit==="Good") return "badge warn";
+    return "badge bad";
+  }
+
+  function render(){
+    const state = $("state").value;
+    const occ = $("occ").value;
+
+    const price = n($("price").value);
+    const dp = n($("dp").value);
+    const value = Math.max(1, n($("value").value));
+    const loan = Math.max(0, price - dp);
+
+    const rate = n($("rate").value);
+    const term = Math.max(1, n($("term").value));
+    const tax = n($("tax").value);
+    const ins = n($("ins").value);
+    const hoa = n($("hoa").value);
+    const rent = n($("rent").value);
+
+    const income = Math.max(1, n($("income").value));
+    const debt = n($("debt").value);
+
+    const fico = n($("fico").value);
+    const dpPct = dp/Math.max(1,price);
+
+    const pi = estPI(loan, rate, term);
+    const pitia = pi + tax + ins + hoa;
+
+    const dscr = rent / Math.max(1, pitia);
+    const dti = (pitia + debt) / income;
+    const ltv = loan / value;
+
+    const closeDays = n($("closeDays").value);
+    const gap = n($("gap").value);
+    const finC = $("finC").value==="yes";
+    const insC = $("insC").value==="yes";
+    const saleC = $("saleC").value==="yes";
+    const os = offerScore(closeDays, finC, insC, saleC, gap);
+
+    // Quick
+    $("quick").innerHTML = `
+      <div class="kv"><span>Loan Amount</span><span><strong>${money(loan)}</strong></span></div>
+      <div class="kv"><span>LTV</span><span><strong>${pct(ltv)}</strong></span></div>
+      <div class="kv"><span>Est. PITIA (mo)</span><span><strong>${money(pitia)}</strong></span></div>
+      <div class="kv"><span>DSCR (inv)</span><span><strong>${dscr.toFixed(2)}</strong></span></div>
+      <div class="kv"><span>DTI (owner)</span><span><strong>${pct(dti)}</strong></span></div>
+      <div class="kv"><span>Offer Strength</span><span><strong>${os}/100</strong></span></div>
+    `;
+
+    // Recs
+    const recs = programRecs(occ, dscr, fico, dpPct);
+    $("recs").innerHTML = recs.map(r => `
+      <div style="margin-bottom:10px;">
+        <div style="display:flex; justify-content:space-between; gap:10px; align-items:center;">
+          <strong>${r.name}</strong>
+          <span class="${badgeClass(r.fit)}">${r.fit}</span>
+        </div>
+        <ul style="margin:6px 0 0 18px; color:#666;">
+          ${r.why.map(x=>`<li>${x}</li>`).join("")}
+        </ul>
+      </div>
+    `).join("");
+
+    // Flags
+    const flags=[];
+    if (occ==="Investment" && dscr<1.0) flags.push("DSCR < 1.00 — may require higher down payment, rent support, or pricing adjustments.");
+    if (occ!=="Investment" && dti>0.45) flags.push("DTI appears > 45% — program overlays may apply depending on documentation.");
+    if (ltv>0.80) flags.push("LTV > 80% — pricing/MI/eligibility may be affected.");
+    if (fico && fico<660) flags.push("Credit score < 660 — pricing and overlays may apply.");
+    if (!["CA","WA","TX"].includes(state)) flags.push("State outside CA/WA/TX — confirm availability and disclosures.");
+    $("flags").innerHTML = flags.length ? `<ul style="margin:6px 0 0 18px; color:#666;">${flags.map(f=>`<li>${f}</li>`).join("")}</ul>` : `<span class="badge ok">No major flags</span>`;
+
+    // Report Body
+    const reportHtml = `
+      <div class="kvs">
+        <div class="kv"><span>State</span><span><strong>${state}</strong></span></div>
+        <div class="kv"><span>Occupancy</span><span><strong>${occ}</strong></span></div>
+        <div class="kv"><span>Purchase Price</span><span><strong>${money(price)}</strong></span></div>
+        <div class="kv"><span>Down Payment</span><span><strong>${money(dp)}</strong></span></div>
+        <div class="kv"><span>Loan Amount</span><span><strong>${money(loan)}</strong></span></div>
+        <div class="kv"><span>LTV</span><span><strong>${pct(ltv)}</strong></span></div>
+        <div class="kv"><span>Est. PITIA (monthly)</span><span><strong>${money(pitia)}</strong></span></div>
+        <div class="kv"><span>Rent (monthly)</span><span><strong>${money(rent)}</strong></span></div>
+        <div class="kv"><span>DSCR</span><span><strong>${dscr.toFixed(2)}</strong></span></div>
+        <div class="kv"><span>DTI (if applicable)</span><span><strong>${pct(dti)}</strong></span></div>
+        <div class="kv"><span>Offer Strength Score</span><span><strong>${os} / 100</strong></span></div>
+      </div>
+      <div class="sep"></div>
+      <div>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <strong>Recommended Programs:</strong>
+          ${recs.map(r=>`<span class=\"${badgeClass(r.fit)}\">${r.name} — ${r.fit}</span>`).join(" ")}
+        </div>
+      </div>
+      ${$("notes").value ? `<div class="sep"></div><div><strong>Notes:</strong><div class="small" style="margin-top:6px; white-space:pre-wrap;">${$("notes").value}</div></div>` : "" }
+      <div class="sep"></div>
+      <div class="small">
+        Disclaimer: This summary provides estimates for discussion only and does not constitute a loan approval, commitment, or underwriting decision.
+      </div>
+    `;
+    $("reportBody").innerHTML = reportHtml;
+  }
+
+  function initContact(){
+    $("vPhone").textContent = VINCENT_PHONE;
+    $("vEmail").textContent = VINCENT_EMAIL;
+    $("rPhone").textContent = VINCENT_PHONE;
+    $("rEmail").textContent = VINCENT_EMAIL;
+
+    $("callBtn").href = "tel:" + VINCENT_PHONE.replace(/[^\d+]/g,"");
+    $("emailBtn").href = "mailto:" + VINCENT_EMAIL;
+  }
+
+  // Events
+  ["state","occ","price","dp","value","fico","rate","term","tax","ins","hoa","rent","income","debt","closeDays","gap","finC","insC","saleC","notes"].forEach(id=>{
+    $(id).addEventListener("input", render);
+    $(id).addEventListener("change", render);
+  });
+
+  $("gen").addEventListener("click", () => {
+    render();
+    $("report").classList.add("show");
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+  });
+
+  $("print").addEventListener("click", () => window.print());
+
+  initContact();
+  render();
+<!-- test -->
